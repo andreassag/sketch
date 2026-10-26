@@ -36,7 +36,9 @@ public:
     void reset() noexcept {
         h_f_ = 0;
         h_r_ = 0;
+        hr_init_ = 0;
         window_.clear();
+        window_head_ = 0;
     }
 
     uint32_t k() const noexcept { return k_; }

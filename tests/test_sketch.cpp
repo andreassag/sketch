@@ -45,6 +45,35 @@ void test_nthash_rolling_and_invariance() {
     std::cout << "[PASS] test_nthash_rolling_and_invariance\n";
 }
 
+void test_nthash_reset_on_invalid_bases() {
+    uint32_t k = 7;
+    sketch::NtHasher hasher(k);
+    std::string prefix = "ACGTACG";
+    for (char c : prefix) {
+        hasher.roll(c);
+    }
+    // Now insert invalid bases
+    hasher.roll('N');
+    hasher.roll('N');
+
+    std::string post = "TGCAACTGGT";
+    std::vector<uint64_t> rolled;
+    for (char c : post) {
+        auto h = hasher.roll(c);
+        if (h.has_value()) {
+            rolled.push_back(*h);
+        }
+    }
+
+    assert(rolled.size() == post.size() - k + 1);
+    for (size_t i = 0; i < rolled.size(); ++i) {
+        auto direct = sketch::NtHasher::hash_kmer(std::string_view(post.data() + i, k));
+        assert(direct.has_value());
+        assert(rolled[i] == *direct);
+    }
+    std::cout << "[PASS] test_nthash_reset_on_invalid_bases\n";
+}
+
 void test_monotonic_queue() {
     sketch::MonotonicMinQueue<int, uint32_t> mq;
     std::vector<int> vals = {5, 3, 8, 2, 9, 1, 4, 7};
@@ -164,6 +193,7 @@ void test_nj_tree() {
 int main() {
     std::cout << "Running sketch unit tests...\n";
     test_nthash_rolling_and_invariance();
+    test_nthash_reset_on_invalid_bases();
     test_monotonic_queue();
     test_radix_sort();
     test_sketch_ani();
