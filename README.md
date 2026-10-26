@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> **Archival Notice**
+> This repository is archived and is no longer actively maintained.
+
 # sketch: Rolling ntHash, Open Syncmers & FracMinHash ANI Engine
 
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
