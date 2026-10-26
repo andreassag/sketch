@@ -1,6 +1,5 @@
-> [!IMPORTANT]
-> **Archival Notice**
-> This repository is archived and is no longer actively maintained.
+> [!NOTE]
+> **Archive Notice**: This project is an educational and reference implementation of rolling ntHash, Open Syncmers, and FracMinHash ANI estimation in C++20. It is finished and archived; no active maintenance or feature development is planned.
 
 # sketch: Rolling ntHash, Open Syncmers & FracMinHash ANI Engine
 
